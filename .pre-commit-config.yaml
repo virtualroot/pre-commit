@@ -1,3 +1,4 @@
+exclude: 'test/'
 repos:
 - repo: git@github.com:virtualroot/pre-commit.git
   rev: v1.0.1
