@@ -1,0 +1,33 @@
+name: Releases
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    name: Trigger a new release
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install npm dependencies
+        run: |
+          npm install -D \
+            @semantic-release/exec \
+            @semantic-release/github \
+            semantic-release-docker
+
+      - name: Create semantic release
+        env:
+          DOCKER_USERNAME: virtualroot
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
