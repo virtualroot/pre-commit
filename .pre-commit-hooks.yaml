@@ -1,0 +1,7 @@
+- id: dockerfile-lint
+  name: dockerfile-lint
+  description: Lint Dockerfiles with hadolint
+  entry: pre-commit:latest hadolint
+  language: docker_image
+  types: [file]
+  files: Dockerfile(.*)
