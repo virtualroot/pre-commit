@@ -18,6 +18,12 @@ jobs:
     - name: Install BATS
       run: sudo npm install -g bats
 
+    - name: Setting up Python
+      uses: actions/setup-python@v2
+
+    - name: Setting up pre-commit
+      run: pip install pre-commit
+
     - name: Runt Test
       run: npx bats test/
 
