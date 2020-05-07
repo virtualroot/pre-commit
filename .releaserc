@@ -3,11 +3,11 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     ["@semantic-release/exec", {
-      "prepareCmd": "docker build -t docker.pkg.github.com/virtualroot/semver/semver ."
+      "prepareCmd": "docker build -t docker.pkg.github.com/virtualroot/pre-commit/pre-commit ."
     }],
     ["semantic-release-docker", {
       registryUrl: "docker.pkg.github.com",
-      name: "docker.pkg.github.com/virtualroot/semver/semver"
+      name: "docker.pkg.github.com/virtualroot/pre-commit/pre-commit"
     }],
     ["@semantic-release/github"],
   ]
