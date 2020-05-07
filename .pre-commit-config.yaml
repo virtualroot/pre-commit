@@ -1,0 +1,6 @@
+repos:
+- repo: git@github.com:virtualroot/pre-commit.git
+  rev: v1.0.1
+  hooks:
+  - id: dockerfile-lint
+    name: dockerfile-lint
