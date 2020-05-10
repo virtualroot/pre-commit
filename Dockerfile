@@ -25,4 +25,4 @@ RUN go get -v -u honnef.co/go/tools/cmd/staticcheck && \
 
 USER pre-commit
 
-CMD ['/bin/bash']
+CMD ["/bin/bash"]
