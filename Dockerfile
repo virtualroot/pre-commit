@@ -12,6 +12,8 @@ SHELL ["/bin/bash", "-l", "-c"]
 
 RUN adduser -s /bin/bash -h /home/pre-commit -D pre-commit
 
+ENV PATH="${PATH}:/home/pre-commit/go/bin"
+
 WORKDIR /home/pre-commit
 
 # dockerfile-lint
@@ -19,10 +21,11 @@ RUN wget https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERS
     mv hadolint-Linux-x86_64 /usr/local/bin/hadolint && \
     chmod +x /usr/local/bin/hadolint
 
-# golang-lint
+USER pre-commit
+
+# golang-staticcheck
+# golang-golint
 RUN go get -v -u honnef.co/go/tools/cmd/staticcheck && \
     go get -v -u golang.org/x/lint/golint
-
-USER pre-commit
 
 CMD ["/bin/bash"]
