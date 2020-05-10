@@ -1,0 +1,39 @@
+name: pre-commit
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setting up Python
+      uses: actions/setup-python@v1
+
+    - name: Export changed files
+      uses: futuratrepadeira/changed-files@v3.0.0
+      id: changed-files
+      with:
+        repo-token: ${{ github.token }}
+
+    - name: set FILES
+      run: |
+        echo "::set-env name=FILES::${{ steps.changed-files.outputs.files_created }} ${{ steps.changed-files.outputs.files_updated }} ${{ steps.changed-files.outputs.files_deleted }}"
+
+    - name: set PY
+      run: echo "::set-env name=PY::$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')"
+
+    - name: Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pre-commit
+        key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
+
+    - uses: deepyaman/action@v1.0.2
+      with:
+        args: --files ${{ env.FILES }}
