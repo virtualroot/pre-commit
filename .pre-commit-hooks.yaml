@@ -5,3 +5,11 @@
   language: docker_image
   types: [file]
   files: Dockerfile(.*)
+- id: golang-staticcheck
+  name: golang-staticcheck
+  description: Lint Golang files with staticcheck
+  entry: virtualroot/pre-commit:latest staticcheck
+  language: docker_image
+  types: [file]
+  files: \.go$
+  exclude: vendor\/.*$
