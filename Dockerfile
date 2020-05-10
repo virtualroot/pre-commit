@@ -26,6 +26,7 @@ USER pre-commit
 # golang-staticcheck
 # golang-golint
 RUN go get -v -u honnef.co/go/tools/cmd/staticcheck && \
-    go get -v -u golang.org/x/lint/golint
+    go get -v -u golang.org/x/lint/golint && \
+    go get github.com/GeertJohan/fgt
 
 CMD ["/bin/bash"]

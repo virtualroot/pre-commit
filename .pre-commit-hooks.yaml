@@ -13,3 +13,11 @@
   types: [file]
   files: \.go$
   exclude: vendor\/.*$
+- id: golang-golint
+  name: golang-golint
+  description: Lint Golang files with golint
+  entry: virtualroot/pre-commit:latest fgt golint
+  language: docker_image
+  types: [file]
+  files: \.go$
+  exclude: vendor\/.*$
